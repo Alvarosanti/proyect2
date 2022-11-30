@@ -1,0 +1,90 @@
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  <script>
+    AFRAME.registerComponent('cursor-listener', {
+      init: function () {
+        var newcolor = "green";
+        this.el.addEventListener("fusing", function (e) {
+          this.setAttribute('material', 'color', newcolor);
+        });
+        this.el.addEventListener("click", function (e) {
+          this.setAttribute('material', 'color', "yellow");
+        });
+      }
+    });
+  </script>
+
+  <script>
+    AFRAME.registerComponent('change-site', {
+      schema: {
+        img: {
+          type: 'string'
+        }
+      }, init: function () {
+        var data = this.data;
+        var el = this.el;
+        el.addEventListener("mouseenter", function () {
+          var mySky = document.querySelector("#my-sky");
+          mySky.setAttribute("src", data.img);
+        });
+      }
+    });
+  </script>
+
+
+  <script id="link" type="text/html">
+        <a-entity class="link"
+          sound="on: click; src: #click-sound"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-assets inspector="url:https://aframe.io/releases/0.3.0/aframe-inspector.min.js%22%3E">
+      <img id="fondo" src="Imagen/quirofano.jpg">
+      <img id="img-saxaiwaman-2" src="Imagen/quirofano.jpg" alt="img-saxaiwaman-2">
+      <audio id="click-sound" crossorigin="anonymous"
+        src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+      <img id="mesa" src="Imagen/TexturesCom_Cathedral_Tiles_header.jpg">
+      <img id="palo" src="Imagen/TexturesCom_Brushed_Steel_header.jpg">
+      <a-sound id="sound" src="quirofanoSound.mp3" autoplay="true" position="0 2 5" sound=""></a-sound>
+      <img id="cruzme" src="Imagen/cruzmedic.png">
+      <img id="basura" src="Imagen/tapabocas.png">
+      <img id="medico" src="Imagen/medico 3.jpg">
+      <img id="doca" src="arbol/doca1.jpeg">
+      <img id="anatomia" src="Imagen/anatomia.jfif">
+      <img id="rayosx" src="Imagen/rayos x.jpg">
+      <a-sound id="sound" src="quirofanoSound.mp3" autoplay="true" position="0 2 5" sound=""></a-sound>
+      <a-assets-item id="pilar" src="pilar/scene.gltf">
+      </a-assets-item>
+      <a-assets-item id="tronco" src="tronco/scene.gltf">
+      </a-assets-item>
+      <a-assets-item id="arbol" src="arbol/scene.gltf">
+      </a-assets-item>
+    </a-assets>
+    <a-camera>
+      <a-cursor raycaster="objects: .clickable"></a-cursor>
+    </a-camera>
+    <a-entity sound="src:#sonido"></a-entity>
+    <a-sky id="my-sky" src="#fondo"></a-sky>
+    <a-entity camera look-controls position="0 0 6" user-height="0">
+      <a-entity cursor="fuse:true; fuseTimeout:1000" position="0 0 -2"
+        geometry="primitive:ring;radiusInner:0.03;radiusOuter:0.04">
+      </a-entity>
+      <a-cursor raycaster="objects: .clickable"></a-cursor>
+    </a-entity>
+    <a-sphere src="#cruzme" position="-204 46.82 -141.03" radius="7.5">
+      <a-animation attribute="rotation" dur="1500" from="0 0 0" to="0 360 0" repeat="10000" delay="0" easing="linear">
+      </a-animation>
+    </a-sphere>
+    <a-plane src="#anatomia" position="-647 18.22 -923.98" height="400" width="310" depth="40" color="#90AFC4">
+    </a-plane>
+    <a-plane src="#rayosx" position="350 20.22 -1210.98" height="380" width="300" depth="40" color="#90AFC4">
+    </a-plane>
+    <a-box src="#basura" position="270 20.69 80.3" height="80" width="0.5" depth="50" color="#ffffff"></a-box>
+    <a-entity gltf-model="#arbol" modify-materials position="371.0 -148.92 1265.94" scale="0.2 0.2 0.2"></a-entity>
+  </a-scene>
+</body>
+
+</html>
